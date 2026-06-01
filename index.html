@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Trie Autocomplete Dashboard</title>
+    
+    <link rel="stylesheet" href="css/main.css">
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+
+    <div class="dashboard-container">
+        
+        <aside class="sidebar">
+            <div class="sidebar__brand">
+                <i class="fa-solid fa-network-wired"></i>
+                <h2>TrieDS</h2>
+            </div>
+            <nav class="sidebar__nav">
+                <ul>
+                    <li class="active">
+                        <a href="#"><i class="fa-solid fa-chart-columns"></i> Dashboard</a>
+                    </li>
+                    <li>
+                        <a href="https://github.com" target="_blank"><i class="fa-brands fa-github"></i> Código Fonte</a>
+                    </li>
+                </ul>
+            </nav>
+            <div class="sidebar__footer">
+                <p>Estrutura de Dados &copy; 2026</p>
+            </div>
+        </aside>
+
+        <main class="main-content">
+            
+            <header class="main-header">
+                <h1>Painel de Controle - Árvore Trie</h1>
+                <p>Estrutura de dados aplicada ao sistema de sugestão de palavras (Autocomplete).</p>
+            </header>
+
+            <div class="dashboard-grid">
+                
+                <section class="card card--search">
+                    <div class="card__header">
+                        <i class="fa-solid fa-magnifying-glass"></i>
+                        <h3>Testar Sugestões (Prefixo)</h3>
+                    </div>
+                    <div class="card__body">
+                        <div class="search-box">
+                            <input type="text" id="trie-input" placeholder="Digite as primeiras letras... (Ex: ma)" autocomplete="off">
+                            <button id="clear-btn" title="Limpar busca"><i class="fa-solid fa-xmark"></i></button>
+                        </div>
+                        
+                        <ul id="suggestions-list" class="suggestions-list">
+                            <li class="placeholder">Aguardando digitação...</li>
+                        </ul>
+                    </div>
+                </section>
+
+                <section class="card card--manage">
+                    <div class="card__header">
+                        <i class="fa-solid fa-folder-plus"></i>
+                        <h3>Alimentar a Árvore</h3>
+                    </div>
+                    <div class="card__body">
+                        <div class="insert-box">
+                            <input type="text" id="word-input" placeholder="Nova palavra (Ex: mariana)">
+                            <button id="add-word-btn" class="btn btn--primary">Inserir</button>
+                        </div>
+                        
+                        <div class="info-box">
+                            <h4>Palavras no Dicionário Atual:</h4>
+                            <div id="registered-words" class="word-tags">
+                                <span class="tag">estrutura</span>
+                                <span class="tag">dados</span>
+                                <span class="tag">trie</span>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <section class="card card--info">
+                    <div class="card__header">
+                        <i class="fa-solid fa-chart-line"></i>
+                        <h3>Análise de Complexidade (Big-O)</h3>
+                    </div>
+                    <div class="card__body">
+                        <table class="tech-table">
+                            <thead>
+                                <tr>
+                                    <th>Operação</th>
+                                    <th>Pior Caso</th>
+                                    <th>Espaço</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td><strong>Inserção</strong></td>
+                                    <td><code class="badge badge--green">O(m)</code></td>
+                                    <td><code class="badge badge--green">O(m * n)</code></td>
+                                </tr>
+                                <tr>
+                                    <td><strong>Busca de Prefixo</strong></td>
+                                    <td><code class="badge badge--green">O(m)</code></td>
+                                    <td><code class="badge badge--green">O(1)</code></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                        <p class="table-caption">* Onde <strong>m</strong> é o tamanho da palavra e <strong>n</strong> é o número total de chaves.</p>
+                    </div>
+                </section>
+
+            </div> </main>
+    </div>
+
+    <script src="js/trie.js"></script>
+    <script src="js/main.js"></script>
+</body>
+</html>

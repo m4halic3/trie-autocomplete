@@ -1,0 +1,359 @@
+// Importando as configurações e ferramentas
+@use 'variables' as *;
+@use 'mixins' as *;
+
+// ==========================================
+// 1. RESET & CONFIGURAÇÕES GLOBAIS
+// ==========================================
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+}
+
+body {
+    background-color: $color-bg;
+    color: $color-text-main;
+    min-height: 100vh;
+    overflow-x: hidden; // Evita qualquer rolagem horizontal indesejada no mobile
+}
+
+// ==========================================
+// 2. ESTRUTURA DO LAYOUT (CONTAINER & SIDEBAR)
+// ==========================================
+.dashboard-container {
+    display: flex;
+    min-height: 100vh;
+
+    // Se a tela for menor que 768px (Mobile), transforma em coluna
+    @include respond-to(md) {
+        flex-direction: column;
+    }
+}
+
+.sidebar {
+    width: 260px;
+    background-color: $color-sidebar;
+    color: white;
+    display: flex;
+    flex-direction: column;
+    padding: 2rem 1.5rem;
+    flex-shrink: 0; // Garante que a barra manterá o tamanho fixo no desktop
+
+    @include respond-to(md) {
+        width: 100%;
+        padding: 1rem;
+        flex-direction: row;            // Itens lado a lado no mobile
+        align-items: center;
+        justify-content: space-between; // Marca na esquerda, navegação na direita
+        flex-wrap: wrap;                // Permite quebra caso a tela seja muito pequena
+        gap: 10px;
+    }
+
+    &__brand {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+        margin-bottom: 3rem;
+        
+        i { color: $color-sidebar-active; font-size: 1.6rem; }
+        h2 { font-size: 1.3rem; font-weight: 600; letter-spacing: 0.5px; }
+
+        @include respond-to(md) { 
+            margin-bottom: 0; // Remove o espaçamento inferior no mobile
+        }
+    }
+
+    &__nav {
+        @include respond-to(md) { 
+            margin-top: 0; // Remove a margem superior no mobile
+        }
+        
+        ul {
+            list-style: none;
+            
+            @include respond-to(md) { 
+                display: flex; 
+                gap: 8px; 
+            }
+
+            li {
+                margin-bottom: 0.5rem;
+                @include respond-to(md) { margin-bottom: 0; }
+
+                a {
+                    display: flex;
+                    align-items: center;
+                    gap: 12px;
+                    color: $color-sidebar-text;
+                    text-decoration: none;
+                    padding: 0.8rem 1rem;
+                    border-radius: 8px;
+                    font-size: 0.95rem;
+                    transition: all 0.2s ease;
+
+                    @include respond-to(md) {
+                        padding: 0.5rem 0.8rem; // Botões mais compactos para telas menores
+                        font-size: 0.85rem;     // Fonte sutilmente menor para não quebrar
+                    }
+
+                    &:hover {
+                        background: rgba(255, 255, 255, 0.05);
+                        color: white;
+                    }
+                }
+
+                &.active a {
+                    background: rgba(56, 189, 248, 0.12);
+                    color: $color-sidebar-active;
+                    font-weight: 600;
+                }
+            }
+        }
+    }
+
+    &__footer {
+        margin-top: auto;
+        font-size: 0.75rem;
+        color: $color-sidebar-text;
+        text-align: center;
+        
+        @include respond-to(md) { display: none; } // Oculta o rodapé da sidebar no mobile
+    }
+}
+
+// ==========================================
+// 3. CONTEÚDO PRINCIPAL & GRID RESPONSIVO
+// ==========================================
+.main-content {
+    flex: 1;
+    padding: 2.5rem;
+    max-width: 100%; // Impede que o conteúdo empurre as bordas da tela
+    
+    @include respond-to(md) { padding: 1.5rem 1rem; }
+}
+
+.main-header {
+    margin-bottom: 2.5rem;
+    h1 { font-size: 1.8rem; color: $color-sidebar; margin-bottom: 0.4rem; }
+    p { color: $color-text-muted; font-size: 1rem; }
+}
+
+// Grid dinâmica usando CSS Grid
+.dashboard-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr); // Duas colunas iguais no desktop
+    gap: 1.5rem;
+    width: 100%;
+
+    // Se a tela for menor que 1024px, vira uma única coluna empilhada
+    @include respond-to(lg) {
+        grid-template-columns: 1fr;
+    }
+}
+
+// ==========================================
+// 4. COMPONENTE: CARD
+// ==========================================
+.card {
+    background: $color-card-bg;
+    border-radius: 12px;
+    border: 1px solid $color-border;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.02), 0 4px 12px rgba(0, 0, 0, 0.03);
+    padding: 1.5rem;
+    display: flex;
+    flex-direction: column;
+    max-width: 100%; // Proteção contra overflow
+
+    // O Card de info teórica ocupa as duas colunas no desktop
+    &--info {
+        grid-column: span 2;
+        @include respond-to(lg) { grid-column: span 1; }
+    }
+
+    &__header {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        margin-bottom: 1.5rem;
+        border-bottom: 1px solid $color-border;
+        padding-bottom: 0.8rem;
+
+        i { color: $color-primary; font-size: 1.2rem; }
+        h3 { font-size: 1.1rem; color: $color-sidebar; font-weight: 600; }
+    }
+}
+
+// ==========================================
+// 5. CAIXAS DE ENTRADA E SUGESTÕES (TRIE UI)
+// ==========================================
+.search-box, .insert-box {
+    display: flex;
+    gap: 10px;
+    position: relative;
+    margin-bottom: 1rem;
+    width: 100%;
+
+    input {
+        flex: 1;
+        padding: 0.8rem 1rem;
+        border: 1px solid $color-border;
+        border-radius: 8px;
+        font-size: 0.95rem;
+        outline: none;
+        background: #fafafa;
+        transition: all 0.2s ease;
+        min-width: 0; // Correção crucial do flexbox para inputs não estourarem o container
+
+        &:focus { 
+            border-color: $color-primary;
+            background: #fff;
+            box-shadow: 0 0 0 4px rgba(99, 102, 241, 0.1);
+        }
+    }
+}
+
+#clear-btn {
+    position: absolute;
+    right: 12px;
+    top: 50%;
+    transform: translateY(-50%);
+    background: none;
+    border: none;
+    color: $color-text-muted;
+    cursor: pointer;
+    font-size: 1.1rem;
+    transition: color 0.2s;
+    
+    &:hover { color: $color-sidebar; }
+}
+
+// Lista onde o Autocomplete vai atuar
+.suggestions-list {
+    list-style: none;
+    border: 1px solid $color-border;
+    border-radius: 8px;
+    max-height: 180px;
+    overflow-y: auto;
+    background: #ffffff;
+
+    li {
+        padding: 0.8rem 1rem;
+        border-bottom: 1px solid $color-border;
+        cursor: pointer;
+        font-size: 0.95rem;
+        transition: all 0.15s ease;
+        word-break: break-all; // Evita que palavras gigantes quebrem a caixinha
+
+        &:last-child { border-bottom: none; }
+        
+        &:hover { 
+            background-color: rgba(99, 102, 241, 0.05); 
+            color: $color-primary; 
+            padding-left: 1.2rem; 
+        }
+        
+        &.placeholder { 
+            color: $color-text-muted; 
+            cursor: default; 
+            background: none;
+            &:hover { padding-left: 1rem; color: $color-text-muted; }
+        }
+    }
+}
+
+// Botões
+.btn {
+    padding: 0.8rem 1.5rem;
+    border: none;
+    border-radius: 8px;
+    font-weight: 600;
+    font-size: 0.95rem;
+    cursor: pointer;
+    transition: background-color 0.2s;
+    white-space: nowrap; // Evita que o texto "Inserir" quebre em duas linhas
+
+    &--primary {
+        background-color: $color-primary;
+        color: white;
+        &:hover { background-color: $color-primary-hover; }
+    }
+}
+
+// Tags para exibir as palavras já inseridas na árvore
+.word-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-top: 0.8rem;
+    max-height: 130px;
+    overflow-y: auto;
+    padding: 4px;
+    border: 1px dashed $color-border;
+    border-radius: 8px;
+    background: #fdfdfd;
+
+    .tag {
+        background: rgba(99, 102, 241, 0.08);
+        color: $color-primary;
+        padding: 0.35rem 0.7rem;
+        border-radius: 6px;
+        font-size: 0.85rem;
+        font-weight: 500;
+        border: 1px solid rgba(99, 102, 241, 0.12);
+        animation: fadeIn 0.3s ease;
+        word-break: break-all;
+    }
+}
+
+h4 {
+    font-size: 0.9rem;
+    color: $color-text-main;
+    margin-top: 1rem;
+}
+
+// ==========================================
+// 6. TABELA COMPONENT (ANÁLISE DO SEMINÁRIO)
+// ==========================================
+.tech-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: 0.8rem;
+
+    @include respond-to(md) {
+        display: block;
+        overflow-x: auto; // Cria rolagem interna na tabela se a tela for muito fina (ex: 320px)
+        white-space: nowrap;
+    }
+
+    th, td {
+        padding: 0.85rem;
+        text-align: left;
+        border-bottom: 1px solid $color-border;
+    }
+    th { color: $color-text-muted; font-weight: 600; font-size: 0.9rem; }
+    td { font-size: 0.95rem; }
+}
+
+.badge {
+    padding: 0.25rem 0.5rem;
+    border-radius: 4px;
+    font-size: 0.85rem;
+    font-family: 'Courier New', Courier, monospace;
+    font-weight: 600;
+
+    &--green { background: rgba(16, 185, 129, 0.1); color: $color-success; }
+}
+
+.table-caption {
+    font-size: 0.8rem;
+    color: $color-text-muted;
+    font-style: italic;
+}
+
+// Animação Simples para as Tags do JS
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(4px); }
+    to { opacity: 1; transform: translateY(0); }
+}
