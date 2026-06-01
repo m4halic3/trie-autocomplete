@@ -1,4 +1,10 @@
-// Importando as configurações e ferramentas
+// ==========================================================================
+// ARQUIVO PRINCIPAL DE ESTILOS (main.scss)
+// ==========================================================================
+// Propósito: Orquestrar a identidade visual da Dashboard, importando tokens,
+// aplicando resets, configurando a grid global e gerenciando componentes de UI.
+
+// Diretivas modernas do SASS para carregamento de módulos isolados
 @use 'variables' as *;
 @use 'mixins' as *;
 
@@ -8,7 +14,7 @@
 * {
     margin: 0;
     padding: 0;
-    box-sizing: border-box;
+    box-sizing: border-box; // Inclui bordas e preenchimentos no cálculo da largura do elemento
     font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
 }
 
@@ -16,19 +22,19 @@ body {
     background-color: $color-bg;
     color: $color-text-main;
     min-height: 100vh;
-    overflow-x: hidden; // Evita qualquer rolagem horizontal indesejada no mobile
+    overflow-x: hidden; // Trava de segurança para impedir qualquer transbordamento e rolagem lateral no mobile
 }
 
 // ==========================================
 // 2. ESTRUTURA DO LAYOUT (CONTAINER & SIDEBAR)
 // ==========================================
 .dashboard-container {
-    display: flex;
+    display: flex; // Flexbox horizontal por padrão no desktop (Sidebar lateral + Conteúdo)
     min-height: 100vh;
 
-    // Se a tela for menor que 768px (Mobile), transforma em coluna
+    // Adaptação para telas médias/menores (Tablets e Celulares)
     @include respond-to(md) {
-        flex-direction: column;
+        flex-direction: column; // Altera o fluxo para empilhamento vertical (Sidebar vira topo)
     }
 }
 
@@ -37,20 +43,22 @@ body {
     background-color: $color-sidebar;
     color: white;
     display: flex;
-    flex-direction: column;
+    flex-direction: column; // Distribuição vertical dos itens internos no desktop
     padding: 2rem 1.5rem;
-    flex-shrink: 0; // Garante que a barra manterá o tamanho fixo no desktop
+    flex-shrink: 0; // Impede que o container reduza a largura do menu se faltar espaço
 
+    // Reconfiguração completa da Sidebar para agir como barra de navegação superior no mobile
     @include respond-to(md) {
         width: 100%;
         padding: 1rem;
-        flex-direction: row;            // Itens lado a lado no mobile
+        flex-direction: row;            // Itens de marca e navegação dispostos lado a lado
         align-items: center;
-        justify-content: space-between; // Marca na esquerda, navegação na direita
-        flex-wrap: wrap;                // Permite quebra caso a tela seja muito pequena
+        justify-content: space-between; // Alinha logotipo na extrema esquerda e menu na direita
+        flex-wrap: wrap;                // Permite quebra suave caso a resolução seja criticamente pequena
         gap: 10px;
     }
 
+    // Identidade/Logo do Sistema
     &__brand {
         display: flex;
         align-items: center;
@@ -61,20 +69,21 @@ body {
         h2 { font-size: 1.3rem; font-weight: 600; letter-spacing: 0.5px; }
 
         @include respond-to(md) { 
-            margin-bottom: 0; // Remove o espaçamento inferior no mobile
+            margin-bottom: 0; // Elimina o recuo inferior quando inserido no topo
         }
     }
 
+    // Lista de Links de Navegação
     &__nav {
         @include respond-to(md) { 
-            margin-top: 0; // Remove a margem superior no mobile
+            margin-top: 0; 
         }
         
         ul {
             list-style: none;
             
             @include respond-to(md) { 
-                display: flex; 
+                display: flex; // Transforma os links verticais em um menu horizontal no mobile
                 gap: 8px; 
             }
 
@@ -94,8 +103,8 @@ body {
                     transition: all 0.2s ease;
 
                     @include respond-to(md) {
-                        padding: 0.5rem 0.8rem; // Botões mais compactos para telas menores
-                        font-size: 0.85rem;     // Fonte sutilmente menor para não quebrar
+                        padding: 0.5rem 0.8rem; // Redução de estofamento para otimização de espaço touch
+                        font-size: 0.85rem;     
                     }
 
                     &:hover {
@@ -104,6 +113,7 @@ body {
                     }
                 }
 
+                // Estado de Link Ativo (Página Atual)
                 &.active a {
                     background: rgba(56, 189, 248, 0.12);
                     color: $color-sidebar-active;
@@ -113,13 +123,14 @@ body {
         }
     }
 
+    // Rodapé de Direitos Autorais
     &__footer {
-        margin-top: auto;
+        margin-top: auto; // Técnica Flexbox para empurrar o bloco fixamente para a base da sidebar
         font-size: 0.75rem;
         color: $color-sidebar-text;
         text-align: center;
         
-        @include respond-to(md) { display: none; } // Oculta o rodapé da sidebar no mobile
+        @include respond-to(md) { display: none; } // Ocultado no mobile para limpar a interface
     }
 }
 
@@ -127,9 +138,9 @@ body {
 // 3. CONTEÚDO PRINCIPAL & GRID RESPONSIVO
 // ==========================================
 .main-content {
-    flex: 1;
+    flex: 1; // Ocupa todo o espaço restante disponível na tela horizontal
     padding: 2.5rem;
-    max-width: 100%; // Impede que o conteúdo empurre as bordas da tela
+    max-width: 100%; // Previne estouros de layout
     
     @include respond-to(md) { padding: 1.5rem 1rem; }
 }
@@ -140,36 +151,36 @@ body {
     p { color: $color-text-muted; font-size: 1rem; }
 }
 
-// Grid dinâmica usando CSS Grid
+// Layout de Distribuição dos Painéis usando CSS Grid
 .dashboard-grid {
     display: grid;
-    grid-template-columns: repeat(2, 1fr); // Duas colunas iguais no desktop
+    grid-template-columns: repeat(2, 1fr); // Define duas colunas idênticas e proporcionais no Desktop
     gap: 1.5rem;
     width: 100%;
 
-    // Se a tela for menor que 1024px, vira uma única coluna empilhada
+    // Transição adaptativa para monitores menores ou tablets (Breakpoint LG)
     @include respond-to(lg) {
-        grid-template-columns: 1fr;
+        grid-template-columns: 1fr; // Recolhe a malha para apenas uma coluna por linha
     }
 }
 
 // ==========================================
-// 4. COMPONENTE: CARD
+// 4. COMPONENTE: CARD (PAINÉIS DA DASHBOARD)
 // ==========================================
 .card {
     background: $color-card-bg;
     border-radius: 12px;
     border: 1px solid $color-border;
-    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.02), 0 4px 12px rgba(0, 0, 0, 0.03);
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.02), 0 4px 12px rgba(0, 0, 0, 0.03); // Efeito suave de profundidade
     padding: 1.5rem;
     display: flex;
     flex-direction: column;
-    max-width: 100%; // Proteção contra overflow
+    max-width: 100%;
 
-    // O Card de info teórica ocupa as duas colunas no desktop
+    // Modificador: Aloca o card de base teórica/tabelas expandido ao longo de 2 colunas
     &--info {
         grid-column: span 2;
-        @include respond-to(lg) { grid-column: span 1; }
+        @include respond-to(lg) { grid-column: span 1; } // Restringe a 1 coluna no modo responsivo
     }
 
     &__header {
@@ -186,7 +197,7 @@ body {
 }
 
 // ==========================================
-// 5. CAIXAS DE ENTRADA E SUGESTÕES (TRIE UI)
+// 5. CAIXAS DE ENTRADA E SUGESTÕES (INTERFACES DA ÁRVORE TRIE)
 // ==========================================
 .search-box, .insert-box {
     display: flex;
@@ -204,21 +215,22 @@ body {
         outline: none;
         background: #fafafa;
         transition: all 0.2s ease;
-        min-width: 0; // Correção crucial do flexbox para inputs não estourarem o container
+        min-width: 0; // Correção essencial no Flexbox: impede o input de expandir além do limite do Card
 
         &:focus { 
             border-color: $color-primary;
             background: #fff;
-            box-shadow: 0 0 0 4px rgba(99, 102, 241, 0.1);
+            box-shadow: 0 0 0 4px rgba(99, 102, 241, 0.1); // Anel estético de foco
         }
     }
 }
 
+// Botão interno flutuante "X" para reset de busca
 #clear-btn {
     position: absolute;
     right: 12px;
     top: 50%;
-    transform: translateY(-50%);
+    transform: translateY(-50%); // Alinhamento centralizado perfeito baseado no próprio eixo Y
     background: none;
     border: none;
     color: $color-text-muted;
@@ -229,13 +241,13 @@ body {
     &:hover { color: $color-sidebar; }
 }
 
-// Lista onde o Autocomplete vai atuar
+// Lista dinâmica que exibirá o autocomplete gerado pelo algoritmo do JS
 .suggestions-list {
     list-style: none;
     border: 1px solid $color-border;
     border-radius: 8px;
     max-height: 180px;
-    overflow-y: auto;
+    overflow-y: auto; // Ativa barra de rolagem interna vertical caso exceda o limite
     background: #ffffff;
 
     li {
@@ -244,16 +256,18 @@ body {
         cursor: pointer;
         font-size: 0.95rem;
         transition: all 0.15s ease;
-        word-break: break-all; // Evita que palavras gigantes quebrem a caixinha
+        word-break: break-all; // Evita que palavras excessivamente longas estoure a largura do bloco
 
         &:last-child { border-bottom: none; }
         
+        // Feedback visual simulando a seleção ativa de uma palavra sugerida
         &:hover { 
             background-color: rgba(99, 102, 241, 0.05); 
             color: $color-primary; 
-            padding-left: 1.2rem; 
+            padding-left: 1.2rem; // Deslocamento elegante induzido pelo hover
         }
         
+        // Estado inicial neutro (Aguardando digitação)
         &.placeholder { 
             color: $color-text-muted; 
             cursor: default; 
@@ -263,7 +277,7 @@ body {
     }
 }
 
-// Botões
+// Botões de Interação (Inserção)
 .btn {
     padding: 0.8rem 1.5rem;
     border: none;
@@ -272,7 +286,7 @@ body {
     font-size: 0.95rem;
     cursor: pointer;
     transition: background-color 0.2s;
-    white-space: nowrap; // Evita que o texto "Inserir" quebre em duas linhas
+    white-space: nowrap; // Impede que o texto "Inserir" divida-se em duas linhas em resoluções mínimas
 
     &--primary {
         background-color: $color-primary;
@@ -281,16 +295,16 @@ body {
     }
 }
 
-// Tags para exibir as palavras já inseridas na árvore
+// Área de Exibição das Palavras Inseridas na Árvore (Tags Dinâmicas)
 .word-tags {
     display: flex;
-    flex-wrap: wrap;
+    flex-wrap: wrap; // Organiza as tags horizontalmente e gera quebra automática para a linha de baixo
     gap: 8px;
     margin-top: 0.8rem;
     max-height: 130px;
     overflow-y: auto;
     padding: 4px;
-    border: 1px dashed $color-border;
+    border: 1px dashed $color-border; // Contorno pontilhado indicando zona de histórico
     border-radius: 8px;
     background: #fdfdfd;
 
@@ -302,7 +316,7 @@ body {
         font-size: 0.85rem;
         font-weight: 500;
         border: 1px solid rgba(99, 102, 241, 0.12);
-        animation: fadeIn 0.3s ease;
+        animation: fadeIn 0.3s ease; // Dispara a animação assim que o elemento é injetado pelo JavaScript
         word-break: break-all;
     }
 }
@@ -314,16 +328,17 @@ h4 {
 }
 
 // ==========================================
-// 6. TABELA COMPONENT (ANÁLISE DO SEMINÁRIO)
+// 6. COMPONENTE: TABELA TÉCNICA (ANÁLISE DE COMPLEXIDADE - BIG O)
 // ==========================================
 .tech-table {
     width: 100%;
-    border-collapse: collapse;
+    border-collapse: collapse; // Funde as bordas adjacentes das células em uma única linha uniforme
     margin-bottom: 0.8rem;
 
+    // Adaptação para tabelas em telas pequenas
     @include respond-to(md) {
         display: block;
-        overflow-x: auto; // Cria rolagem interna na tabela se a tela for muito fina (ex: 320px)
+        overflow-x: auto; // Cria uma rolagem horizontal interna se a tabela for maior que a tela (proteção mobile)
         white-space: nowrap;
     }
 
@@ -336,11 +351,12 @@ h4 {
     td { font-size: 0.95rem; }
 }
 
+// Etiqueta Visual de Destaque da Notação Big-O
 .badge {
     padding: 0.25rem 0.5rem;
     border-radius: 4px;
     font-size: 0.85rem;
-    font-family: 'Courier New', Courier, monospace;
+    font-family: 'Courier New', Courier, monospace; // Fonte monoespaçada ideal para trechos de código/matemática
     font-weight: 600;
 
     &--green { background: rgba(16, 185, 129, 0.1); color: $color-success; }
@@ -352,8 +368,16 @@ h4 {
     font-style: italic;
 }
 
-// Animação Simples para as Tags do JS
+// ==========================================
+// 7. ANIMAÇÕES (KEYFRAMES)
+// ==========================================
 @keyframes fadeIn {
-    from { opacity: 0; transform: translateY(4px); }
-    to { opacity: 1; transform: translateY(0); }
+    from { 
+        opacity: 0; 
+        transform: translateY(4px); // Efeito sutil de subida enquanto surge em cena
+    }
+    to { 
+        opacity: 1; 
+        transform: translateY(0); 
+    }
 }

@@ -1,13 +1,37 @@
+// ==========================================================================
+// MIXINS DE RESPONSIVIDADE (MEDIA QUERIES)
+// ==========================================================================
+// Propósito: Centralizar e automatizar o gerenciamento de design responsivo.
+// Evita a repetição manual de regras '@media (max-width: ...)' ao longo do projeto.
+
+// Importa o arquivo de variáveis globais. 
+// O sufixo 'as *' permite acessar as variáveis de breakpoint (ex: $breakpoint-sm)
+// diretamente, sem a necessidade de usar um prefixo (como variables.$breakpoint-sm).
 @use 'variables' as *;
 
+/// Mixin utilitário para aplicação de Media Queries baseadas em breakpoints.
+/// @param {String} $breakpoint - O tamanho do dispositivo alvo ('sm', 'md' ou 'lg').
+/// @content - Bloco de regras CSS/SCSS que será injetado dentro da media query.
 @mixin respond-to($breakpoint) {
+    
+    // Dispositivos Pequenos: Telas de celulares (ex: iPhone, Androids em modo retrato)
     @if $breakpoint == sm {
-        @media (max-width: #{$breakpoint-sm}) { @content; }
+        @media (max-width: #{$breakpoint-sm}) { 
+            @content; // Injeta o código customizado passado na chamada do mixin
+        }
     }
+    
+    // Dispositivos Médios: Tablets e celulares grandes em modo paisagem
     @else if $breakpoint == md {
-        @media (max-width: #{$breakpoint-md}) { @content; }
+        @media (max-width: #{$breakpoint-md}) { 
+            @content; 
+        }
     }
+    
+    // Dispositivos Grandes: Notebooks e monitores desktop menores
     @else if $breakpoint == lg {
-        @media (max-width: #{$breakpoint-lg}) { @content; }
+        @media (max-width: #{$breakpoint-lg}) { 
+            @content; 
+        }
     }
 }

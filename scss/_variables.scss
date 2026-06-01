@@ -1,17 +1,37 @@
-// Cores
-$color-bg: #f8fafc;
-$color-sidebar: #0f172a;
-$color-sidebar-text: #94a3b8;
-$color-sidebar-active: #38bdf8;
-$color-card-bg: #ffffff;
-$color-text-main: #334155;
-$color-text-muted: #64748b;
-$color-primary: #6366f1;
-$color-primary-hover: #4f46e5;
-$color-success: #10b981;
-$color-border: #e2e8f0;
+// ==========================================================================
+// VARIÁVEIS GLOBAIS DO PROJETO (DESIGN SYSTEM)
+// ==========================================================================
+// Propósito: Centralizar todas as cores, tipografias e pontos de quebra (breakpoints)
+// do sistema, garantindo consistência visual e fácil manutenção futura.
 
-// Breakpoints
-$breakpoint-sm: 480px;
-$breakpoint-md: 768px;
-$breakpoint-lg: 1024px;
+// --------------------------------------------------------------------------
+// 1. PALETA DE CORES (SEMÂNTICA)
+// --------------------------------------------------------------------------
+
+// Cores de Fundo (Layout Geral)
+$color-bg: #f8fafc;            // Cinza gelo: fundo principal da aplicação (conforto visual)
+$color-sidebar: #0f172a;       // Slate 900 (azul escuro profundo): identidade visual da barra lateral
+$color-card-bg: #ffffff;       // Branco puro: fundo dos cards para dar contraste sobre o cinza gelo
+
+// Cores de Texto (Acessibilidade e Hierarquia)
+$color-text-main: #334155;     // Slate 700 (cinza escuro): texto principal (evita o preto puro que cansa os olhos)
+$color-text-muted: #64748b;    // Slate 500 (cinza médio): subtítulos, placeholders de inputs e textos secundários
+$color-sidebar-text: #94a3b8;  // Slate 400 (cinza claro): links inativos dentro do menu escuro
+
+// Cores de Ação, Destaque e Feedback (Interação com o Usuário)
+$color-primary: #6366f1;       // Indigo (roxo/azul moderno): cor de destaque principal, botões e foco de inputs
+$color-primary-hover: #4f46e5; // Indigo escuro: estado de 'hover' (passar o mouse) nos botões principais
+$color-sidebar-active: #38bdf8;// Sky 400 (azul celeste): destaca visualmente o menu que está selecionado
+$color-success: #10b981;       // Esmeralda (verde): indica feedback positivo (ex: badges de complexidade teórica boa)
+
+// Elementos de Estrutura
+$color-border: #e2e8f0;        // Slate 200 (cinza muito claro): linhas divisórias, tabelas e bordas de inputs
+
+// --------------------------------------------------------------------------
+// 2. BREAKPOINTS DE RESPONSIVIDADE (MEDIA QUERIES)
+// --------------------------------------------------------------------------
+// Valores de largura máxima utilizados pelo mixin 'respond-to' para adaptar o layout.
+
+$breakpoint-sm: 480px;  // Celulares em modo retrato (telas pequenas, ex: smartphones de entrada)
+$breakpoint-md: 768px;  // Tablets em modo retrato e celulares em modo paisagem (virada de layout para topo)
+$breakpoint-lg: 1024px; // Laptops, monitores antigos ou tablets grandes (ajusta a grid de 2 para 1 coluna)
