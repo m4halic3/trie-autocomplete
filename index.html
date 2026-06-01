@@ -13,18 +13,22 @@
 
     <div class="dashboard-container">
         
-        <aside class="sidebar">
+        <aside class="sidebar" aria-label="Navegação Lateral">
             <div class="sidebar__brand">
-                <i class="fa-solid fa-network-wired"></i>
+                <i class="fa-solid fa-network-wired" aria-hidden="true"></i>
                 <h2>TrieDS</h2>
             </div>
-            <nav class="sidebar__nav">
+            <nav class="sidebar__nav" aria-label="Menu Principal">
                 <ul>
                     <li class="active">
-                        <a href="#"><i class="fa-solid fa-chart-columns"></i> Dashboard</a>
+                        <a href="#" aria-current="page">
+                            <i class="fa-solid fa-chart-columns" aria-hidden="true"></i> Dashboard
+                        </a>
                     </li>
                     <li>
-                        <a href="https://github.com/NevesByte/Upload-em-processamento" target="_blank"><i class="fa-brands fa-github"></i> Código Fonte</a>
+                        <a href="https://github.com/NevesByte/Upload-em-processamento" target="_blank" rel="noopener noreferrer">
+                            <i class="fa-brands fa-github" aria-hidden="true"></i> Código Fonte
+                        </a>
                     </li>
                 </ul>
             </nav>
@@ -42,37 +46,42 @@
 
             <div class="dashboard-grid">
                 
-                <section class="card card--search">
+                <section class="card card--search" aria-labelledby="title-search">
                     <div class="card__header">
-                        <i class="fa-solid fa-magnifying-glass"></i>
-                        <h3>Testar Sugestões (Prefixo)</h3>
+                        <i class="fa-solid fa-magnifying-glass" aria-hidden="true"></i>
+                        <h3 id="title-search">Testar Sugestões (Prefixo)</h3>
                     </div>
                     <div class="card__body">
                         <div class="search-box">
+                            <label for="trie-input" class="sr-only">Buscar palavras por prefixo</label>
                             <input type="text" id="trie-input" placeholder="Digite as primeiras letras... (Ex: ma)" autocomplete="off">
-                            <button id="clear-btn" title="Limpar busca"><i class="fa-solid fa-xmark"></i></button>
+                            
+                            <button id="clear-btn" aria-label="Limpar campo de busca" title="Limpar busca">
+                                <i class="fa-solid fa-xmark" aria-hidden="true"></i>
+                            </button>
                         </div>
                         
-                        <ul id="suggestions-list" class="suggestions-list">
+                        <ul id="suggestions-list" class="suggestions-list" aria-live="polite">
                             <li class="placeholder">Aguardando digitação...</li>
                         </ul>
                     </div>
                 </section>
 
-                <section class="card card--manage">
+                <section class="card card--manage" aria-labelledby="title-manage">
                     <div class="card__header">
-                        <i class="fa-solid fa-folder-plus"></i>
-                        <h3>Alimentar a Árvore</h3>
+                        <i class="fa-solid fa-folder-plus" aria-hidden="true"></i>
+                        <h3 id="title-manage">Alimentar a Árvore</h3>
                     </div>
                     <div class="card__body">
                         <div class="insert-box">
+                            <label for="word-input" class="sr-only">Inserir nova palavra no dicionário</label>
                             <input type="text" id="word-input" placeholder="Nova palavra (Ex: mariana)">
                             <button id="add-word-btn" class="btn btn--primary">Inserir</button>
                         </div>
                         
                         <div class="info-box">
-                            <h4>Palavras no Dicionário Atual:</h4>
-                            <div id="registered-words" class="word-tags">
+                            <h4 id="label-tags">Palavras no Dicionário Atual:</h4>
+                            <div id="registered-words" class="word-tags" aria-labelledby="label-tags" aria-live="polite">
                                 <span class="tag">estrutura</span>
                                 <span class="tag">dados</span>
                                 <span class="tag">trie</span>
@@ -81,28 +90,28 @@
                     </div>
                 </section>
 
-                <section class="card card--info">
+                <section class="card card--info" aria-labelledby="title-info">
                     <div class="card__header">
-                        <i class="fa-solid fa-chart-line"></i>
-                        <h3>Análise de Complexidade (Big-O)</h3>
+                        <i class="fa-solid fa-chart-line" aria-hidden="true"></i>
+                        <h3 id="title-info">Análise de Complexidade (Big-O)</h3>
                     </div>
                     <div class="card__body">
                         <table class="tech-table">
                             <thead>
                                 <tr>
-                                    <th>Operação</th>
-                                    <th>Pior Caso</th>
-                                    <th>Espaço</th>
+                                    <th scope="col">Operação</th>
+                                    <th scope="col">Pior Caso</th>
+                                    <th scope="col">Espaço</th>
                                 </tr>
                             </thead>
                             <tbody>
                                 <tr>
-                                    <td><strong>Inserção</strong></td>
+                                    <th scope="row"><strong>Inserção</strong></th>
                                     <td><code class="badge badge--green">O(m)</code></td>
                                     <td><code class="badge badge--green">O(m * n)</code></td>
                                 </tr>
                                 <tr>
-                                    <td><strong>Busca de Prefixo</strong></td>
+                                    <th scope="row"><strong>Busca de Prefixo</strong></th>
                                     <td><code class="badge badge--green">O(m)</code></td>
                                     <td><code class="badge badge--green">O(1)</code></td>
                                 </tr>
@@ -112,7 +121,8 @@
                     </div>
                 </section>
 
-            </div> </main>
+            </div> 
+        </main>
     </div>
 
     <script src="js/trie.js"></script>
