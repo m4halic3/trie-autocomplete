@@ -1,0 +1,13 @@
+# Cache de ferramentas e gerenciadores de pacotes
+.sass-cache/
+node_modules/
+.npm/
+
+# Arquivos gerados automaticamente pelo compilador do Sass
+# Guardamos o main.css porque seu amigo precisa dele se não for compilar, 
+# mas os mapas de mapeamento (.css.map) são descartáveis no repositório.
+css/*.css.map
+
+# Arquivos de sistema operacional
+.DS_Store
+Thumbs.db
