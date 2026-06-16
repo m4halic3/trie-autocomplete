@@ -15,8 +15,10 @@ const wordInput = document.getElementById('word-input');
 const addWordBtn = document.getElementById('add-word-btn');
 const registeredWordsContainer = document.getElementById('registered-words');
 
-// TODO: O seu amigo instanciará a Árvore Trie vinda do trie.js aqui.
-// Exemplo: const minhaArvoreTrie = new Trie();
+const minhaArvoreTrie = new Trie();
+
+// Palavras iniciais pré-carregadas na Trie (espelhando as tags estáticas do HTML)
+['estrutura', 'dados', 'trie'].forEach(p => minhaArvoreTrie.inserir(p));
 
 // --------------------------------------------------------------------------
 // 2. FUNÇÕES DE MANIPULAÇÃO DA INTERFACE (UI FUNCTIONS)
@@ -84,11 +86,8 @@ trieInput.addEventListener('input', (evento) => {
         return;
     }
 
-    // TODO: Integração com o seu amigo.
-    // O código dele fará algo como: const resultados = minhaArvoreTrie.buscar(prefixo);
-    // Por enquanto, simulamos mandando um array vazio para teste:
-    console.log(`Buscando prefixo: ${prefixo}`);
-    renderizarSugestoes([]); 
+    const resultados = minhaArvoreTrie.buscar(prefixo);
+    renderizarSugestoes(resultados);
 });
 
 // Evento 2: Limpa o campo de busca ao clicar no botão "X"
@@ -108,9 +107,7 @@ addWordBtn.addEventListener('click', () => {
         return;
     }
 
-    // TODO: Integração com o seu amigo.
-    // O código dele fará algo como: minhaArvoreTrie.inserir(novaPalavra);
-    console.log(`Palavra enviada para a árvore: ${novaPalavra}`);
+    minhaArvoreTrie.inserir(novaPalavra);
 
     // Atualiza a interface
     adicionarTagVisual(novaPalavra);
