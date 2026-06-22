@@ -369,9 +369,9 @@ ALVES, Camila Fernanda. **Como escrever um README no GitHub: exemplos, dicas e g
 
 Trabalho desenvolvido por:
 
-- **Mariana Alice**
-- **Victor Fernandes**
-- **Yasmim Vitória**
+- **Mariana Alice Pires Leite**
+- **Victor Fernandes Neves**
+- **Yasmim Vitória de Meira Santos**
 
 ---
 
