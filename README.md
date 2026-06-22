@@ -371,7 +371,7 @@ Trabalho desenvolvido por:
 
 - **Mariana Alice Pires Leite**
 - **Victor Fernandes Neves**
-- **Yasmim Vitória de Meira Santos**
+- **Yasmim Vitória Meira dos Santos**
 
 ---
 
