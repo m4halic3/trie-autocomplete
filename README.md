@@ -345,9 +345,9 @@ xdg-open index.html
 Em conformidade com a transparência acadêmica recomendada pela instituição, listam-se a seguir as ferramentas de Inteligência Artificial utilizadas durante o desenvolvimento e a documentação deste projeto, bem como o propósito de cada uma:
 
 - **AWS Q Developer** — apoio na revisão de código, sugestões de boas práticas e identificação de pontos de melhoria na implementação em JavaScript.
-- **Google Gemini** — apoio na pesquisa de conceitos teóricos sobre estruturas de árvore e na validação da notação de complexidade assintótica utilizada.
-- **ChatGPT** — auxílio na idealização e explicação do código, com foco didático na implementação da Trie.
-- **Claude (Anthropic)** — formatação, revisão e estruturação acadêmica da documentação (README.md), com o objetivo de promover clareza e organização para o leitor.
+- **Google Gemini** — apoio na estruturação da interface, na escolha e inserção correta dos ícones, estrutura de pastas e arquivos e também auxiliou em correções de reponsividade.
+- **ChatGPT** — auxílio na idealização e explicação do código, incluindo comentários explicativos.
+- **Claude (Anthropic)** — formatação, revisão e estruturação acadêmica da documentação (README.md e slides de apresentação).
 
 ### Outras ferramentas de apoio
 
