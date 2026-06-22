@@ -355,13 +355,30 @@ Em conformidade com a transparência acadêmica recomendada pela instituição, 
 - **Visual Studio Code** — ambiente de desenvolvimento integrado (IDE) utilizado na escrita do código.
 - **Google Fonts** e **Font Awesome** — tipografia e iconografia da interface.
 
-> É importante ressaltar que o uso de ferramentas de Inteligência Artificial neste projeto restringiu-se a apoio pontual — revisão, explicação de conceitos e formatação de texto —, sendo a lógica de programação, as decisões de arquitetura e a escrita final de responsabilidade dos autores do trabalho.
+> É importante ressaltar que o uso de ferramentas de Inteligência Artificial neste projeto restringiu-se a apoio pontual — revisão, explicação de conceitos e formatação de texto —, sendo a lógica de programação, as decisões de arquitetura e a escrita final de responsabilidade dos autores do trabalho. 
+> Também é importante ressaltar que o diagrama de trie demonstrado como imagem durante o vídeo de explicação do projeto, é gerado por IA, especificamente pelo Claude.
 
 ---
 
+## 🎥 Vídeo de Apresentação
+
+Assista à explicação completa do projeto no YouTube:
+👉 [TrieDS — Explicação do Projeto](https://youtu.be/doJN9Z1HF4Q)
+
 ## 12. Referências
 
+
 ALVES, Camila Fernanda. **Como escrever um README no GitHub: exemplos, dicas e guia passo a passo**. Alura, 2021. Atualizado em 10 jun. 2026. Disponível em: <https://www.alura.com.br/artigos/escrever-bom-readme>. Acesso em: 21 jun. 2026.
+Uso: orientação para a estrutura e os elementos obrigatórios do arquivo README.md (índice, descrição, badges, tecnologias, autores).
+ 
+FEOFILOFF, Paulo. **Estruturas de Dados: Tries (árvores digitais)**. Instituto de Matemática e Estatística, Universidade de São Paulo (IME-USP), 2019. Disponível em: <https://www.ime.usp.br/~pf/estruturas-de-dados/aulas/tries.html>. Acesso em: 21 jun. 2026.
+Uso: fundamentação teórica da Árvore Trie (definição formal, estrutura de nós, operações de inserção e busca, análise de complexidade).
+ 
+MENDES, Guilherme. **Estrutura de Dados: Trie**. Medium, 2021. Disponível em: <https://guilherme-rmendes95.medium.com/estrutura-de-dados-trie-386b6a5d7f90>. Acesso em: 21 jun. 2026.
+Uso: apoio complementar na compreensão prática da implementação da Trie em JavaScript.
+ 
+OBJECTIVE. **Dashboard design: o que é, quais os tipos e vantagens?**. 2023. Disponível em: <https://www.objective.com.br/insights/dashboard-design/>. Acesso em: 21 jun. 2026.
+Uso: fundamenta o objetivo central do dashboard como ferramenta de simplificação da visualização de dados, justificando a escolha de expor a tabela de complexidade Big-O diretamente na interface, em vez de mantê-la apenas na documentação.
 
 ---
 
